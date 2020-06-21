@@ -153,9 +153,9 @@ public class CoresLeaderboardAddon extends LabyModAddon {
 	}
 
 	private boolean isBlueTeam(String nameWithColor) {
-		if(nameWithColor.contains("§c"))
+		if(nameWithColor.charAt(3) == 'c')
 			return false;
-		else if (nameWithColor.contains("§9"))
+		else if (nameWithColor.charAt(3) == '9')
 			return true;
 		else {
 			System.err.println("unknown color: " + nameWithColor);

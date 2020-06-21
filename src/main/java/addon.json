@@ -2,7 +2,7 @@
   "uuid": "%uuid%",
   "name": "GommeHDCoresLeaderboard",
   "mainClass": "de.paul.addon.CoresLeaderboardAddon",
-  "description": "This addon adds a Leaderboard in GommeHD.net Cores",
+  "description": "This addon adds a Kills-Leaderboard to GommeHD.net Cores",
   "version": 1,
   "author": "Paul Juenger",
   "category": 3,
