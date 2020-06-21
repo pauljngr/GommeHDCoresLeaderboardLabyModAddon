@@ -39,7 +39,6 @@ public class CoresLeaderboardModule extends ColoredTextModule {
 		if (lastLines != null && !addon.changes)
 			return lastLines;
 
-		System.out.println("changes");
 		addon.changes = false;
 
 		List<List<Text>> lines = new ArrayList<List<Text>>();
@@ -97,7 +96,7 @@ public class CoresLeaderboardModule extends ColoredTextModule {
 		}
 
 		List<Text> list = new ArrayList<Text>();
-		list.add(new Text("Not in cores round", Color.WHITE.getRGB()));
+		list.add(new Text("Not in cores round (Right text alignment doesn't seem to work)", Color.WHITE.getRGB()));
 		lines.add(list);
 		return lines;
 	}

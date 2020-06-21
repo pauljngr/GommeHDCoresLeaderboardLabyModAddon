@@ -1,10 +1,10 @@
 {
   "uuid": "%uuid%",
-  "name": "GommehdCoresLeaderboard",
+  "name": "GommeHDCoresLeaderboard",
   "mainClass": "de.paul.addon.CoresLeaderboardAddon",
   "description": "This addon adds a Leaderboard in GommeHD.net Cores",
   "version": 1,
   "author": "Paul Juenger",
   "category": 3,
-  "icon": "http://icons.iconarchive.com/icons/chrisl21/minecraft/64/Crafting-Table-icon.png"
+  "icon": "https://learnkanji.de/other/CoresLeaderboardIcon.png"
 }

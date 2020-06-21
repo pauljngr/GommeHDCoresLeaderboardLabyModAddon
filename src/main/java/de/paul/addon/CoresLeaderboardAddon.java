@@ -12,14 +12,16 @@ import net.labymod.settings.elements.ControlElement.IconData;
 import net.labymod.settings.elements.SettingsElement;
 import net.labymod.utils.Consumer;
 import net.labymod.utils.Material;
+import net.labymod.utils.ServerData;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.ClientTickEvent;
 
 public class CoresLeaderboardAddon extends LabyModAddon {
 
-	private boolean enabled = false;
-
+	private boolean enabled = true;
+	private boolean onGommeHD = false;
+	
 	private Minecraft mc = Minecraft.getMinecraft();
 
 	private boolean inCoresRound = false;
@@ -39,7 +41,7 @@ public class CoresLeaderboardAddon extends LabyModAddon {
 				enabled = bool;
 				getConfig().addProperty("Enabled", bool);
 			}
-		}, false));
+		}, this.enabled));
 	}
 
 	@Override
@@ -76,10 +78,32 @@ public class CoresLeaderboardAddon extends LabyModAddon {
 	public void onEnable() {
 		System.out.println("CoresLeaderboard Addon started");
 		this.getApi().registerForgeListener(this);
+		
+		this.getApi().getEventManager().registerOnJoin(new Consumer<ServerData>() {
+			@Override
+			public void accept(ServerData arg0) {
+				if (arg0.getIp().toLowerCase().contains("gommehd")) {
+					onGommeHD = true;
+					System.out.println("Joined gommehd");
+				}
+			}
+		});
+		
+		this.getApi().getEventManager().registerOnQuit(new Consumer<ServerData>() {
+			@Override
+			public void accept(ServerData arg0) {
+				System.out.println("left server");
+				onGommeHD = false;
+			}
+		});
+		
 		this.getApi().getEventManager().register(new MessageReceiveEvent() {
 			@Override
 			public boolean onReceive(String arg0, String arg1) {
-				System.out.println(arg0 + " ||| " + arg1);
+				if (!enabled || !onGommeHD)
+					return false;
+
+				// System.out.println(arg0 + " ||| " + arg1);
 				
 				if (arg1.contains("hat das Spiel betreten") && arg1.contains(mc.thePlayer.getName())) {
 					playerStats = new HashMap<String, CoresStats>();
@@ -138,7 +162,7 @@ public class CoresLeaderboardAddon extends LabyModAddon {
 			return true;
 		}
 	}
-
+	
 	public Collection<CoresStats> getPlayerStats() {
 		if (playerStats != null)
 			return playerStats.values();
